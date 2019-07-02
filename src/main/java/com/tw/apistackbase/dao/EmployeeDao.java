@@ -59,4 +59,17 @@ public class EmployeeDao {
 
         return null;
     }
+
+    public Employee update(int id, Employee newEmployee) {
+        for (Employee employee : employees) {
+            if (employee.getId() == id) {
+                employee.setId(newEmployee.getId());
+                employee.setName(newEmployee.getName());
+                employee.setAge(newEmployee.getAge());
+                employee.setGender(newEmployee.getGender());
+                return newEmployee;
+            }
+        }
+        return null;
+    }
 }

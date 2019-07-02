@@ -51,7 +51,18 @@ public class EmployeeController {
         }
 
         return new ResponseEntity(employee, HttpStatus.OK);
+    }
 
+    @PutMapping("/employees/{id}")
+    public ResponseEntity updateEmployee(@PathVariable int id, @RequestBody Employee employee) {
+
+        employee = employeeDao.update(id, employee);
+
+        if (null == employee) {
+            return new ResponseEntity("No Employee found for ID " + id, HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity(employee, HttpStatus.OK);
     }
 
 }
