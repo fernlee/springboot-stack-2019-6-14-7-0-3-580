@@ -5,9 +5,7 @@ import com.tw.apistackbase.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,12 +24,20 @@ public class EmployeeController {
     }
 
     @GetMapping("/employees/{id}")
-    public ResponseEntity getemployee(@PathVariable("id") int id) {
+    public ResponseEntity getEmployee(@PathVariable("id") int id) {
 
         Employee employee = employeeDao.findById(id);
         if (employee == null) {
             return new ResponseEntity("No employee found for ID " + id, HttpStatus.NOT_FOUND);
         }
+
+        return new ResponseEntity(employee, HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/employees")
+    public ResponseEntity addEmployee(@RequestBody Employee employee) {
+
+        employeeDao.add(employee);
 
         return new ResponseEntity(employee, HttpStatus.OK);
     }

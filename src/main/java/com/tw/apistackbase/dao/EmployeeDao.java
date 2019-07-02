@@ -41,4 +41,10 @@ public class EmployeeDao {
         }
         return null;
     }
+
+    public Employee add(Employee employee) {
+        employee.setId(employees.size());
+        employees.add(employee);
+        return employee;
+    }
 }
