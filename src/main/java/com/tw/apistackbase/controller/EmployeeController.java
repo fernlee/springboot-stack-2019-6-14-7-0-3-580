@@ -42,4 +42,16 @@ public class EmployeeController {
         return new ResponseEntity(employee, HttpStatus.OK);
     }
 
+    @DeleteMapping("/employees/{id}")
+    public ResponseEntity deleteEmployee(@PathVariable int id) {
+
+        final Object employee = employeeDao.delete(id);
+        if (null == employee) {
+            return new ResponseEntity("No Employee found for ID " + id, HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity(employee, HttpStatus.OK);
+
+    }
+
 }

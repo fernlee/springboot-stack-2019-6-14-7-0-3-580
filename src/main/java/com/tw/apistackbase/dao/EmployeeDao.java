@@ -47,4 +47,16 @@ public class EmployeeDao {
         employees.add(employee);
         return employee;
     }
+
+    public Object delete(int id) {
+
+        for (Employee employee : employees) {
+            if (employee.getId() == id) {
+                employees.remove(employee);
+                return employee;
+            }
+        }
+
+        return null;
+    }
 }
