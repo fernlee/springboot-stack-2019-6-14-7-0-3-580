@@ -17,12 +17,13 @@ import java.util.List;
 public class EmployeeDao {
     private List<Employee> employees;
 
-    public EmployeeDao()  {
+    public EmployeeDao() {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             String fileName = "employee.json";
             ClassLoader classLoader = EmployeeDao.class.getClassLoader();
-            employees = objectMapper.readValue(new File(classLoader.getResource(fileName).getFile()), new TypeReference<List<Employee>>(){});
+            employees = objectMapper.readValue(new File(classLoader.getResource(fileName).getFile()), new TypeReference<List<Employee>>() {
+            });
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -30,5 +31,14 @@ public class EmployeeDao {
 
     public List<Employee> findAll() {
         return employees;
+    }
+
+    public Employee findById(int id) {
+        for (Employee employee : employees) {
+            if (employee.getId() == id) {
+                return employee;
+            }
+        }
+        return null;
     }
 }
